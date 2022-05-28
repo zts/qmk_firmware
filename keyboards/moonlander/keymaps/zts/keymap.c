@@ -23,8 +23,11 @@
 
 enum layers {
     BASE,  // default layer
-    SYMB,  // symbols
+    MOVE,  // cursor movement
     MDIA,  // media keys
+	WNDW,  // window management
+	SYMB,  // symbols
+	NUMP,  // numpad
 };
 
 enum custom_keycodes {
@@ -55,31 +58,31 @@ enum custom_keycodes {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[0] = LAYOUT_moonlander(
+	[BASE] = LAYOUT_moonlander(
     	KC_GRAVE,	KC_1,		KC_2,		KC_3,       KC_4,       KC_5,		KC_MINUS,			KC_EQUAL,	KC_6,		KC_7,       KC_8,		KC_9,		KC_0,    	KC_MINUS,       
     	KC_TAB,		KC_Q,    	KC_W,       KC_E,       KC_R,       KC_T,       KC_LBRC,        	KC_RBRC,	KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,    	KC_BSLASH,      
 		ALL_T(KC_ESCAPE),CTL_A, ALT_S,      GUI_D,      SFT_F,      KC_G,       _______,            _______,	KC_H,       SFT_J,      GUI_K,      ALT_L,      CTL_SCLN,	KC_QUOTE,       
 		KC_LSHIFT,	KC_Z,    	KC_X,       KC_C,       KC_V,       KC_B,                                       KC_N,       KC_M,       KC_COMMA,   KC_DOT,     KC_SLASH,	KC_RSHIFT,      
-		KC_LCTRL,	KC_LALT, 	KC_LGUI,    _______,	MO(1),      _______,                                    _______,    MO(4),		_______,	KC_RGUI,    KC_RALT, 	KC_RCTRL,       
-                                            			KC_BSPACE,  MO(5),      MO(2),          	MO(3),   	KC_ENTER,   KC_SPACE
+		KC_LCTRL,	KC_LALT, 	KC_LGUI,    _______,	MO(MOVE),   _______,                                    _______,    MO(SYMB),	_______,	KC_RGUI,    KC_RALT, 	KC_RCTRL,       
+                                            			KC_BSPACE,  MO(NUMP),   MO(MDIA),          	MO(WNDW),  	KC_ENTER,   KC_SPACE
 	),
-	[1] = LAYOUT_moonlander(
-		TO(0),          _______, _______, _______, _______, _______, _______,                                 _______, _______, _______, _______, _______, _______, _______, 
+	[MOVE] = LAYOUT_moonlander(
+		TO(BASE),          _______, _______, _______, _______, _______, _______,                                 _______, _______, _______, _______, _______, _______, _______, 
 		_______, _______, _______, _______, _______, _______, _______,                                 _______, LCTL(KC_LEFT),  LGUI(KC_LBRACKET),LGUI(KC_RBRACKET),RCTL(KC_RIGHT), _______, _______, 
 		_______, KC_LCTRL,       KC_LALT,        KC_LGUI,        KC_LSHIFT,      _______, _______,                                                                 _______, KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       _______, _______, 
 		_______, KC_MAC_UNDO,    KC_MAC_CUT,     KC_MAC_COPY,    KC_MAC_PASTE,   _______,                                 KC_HOME,        KC_PGDOWN,      KC_PGUP,        KC_END,         _______, _______, 
 		_______, _______, _______, _______, _______, _______,                                                                                                 _______, _______, _______, _______, _______, _______, 
 		_______, _______, _______,                 _______, _______, _______
 	),
-	[2] = LAYOUT_moonlander(
-		TO(0),          _______, _______, _______, _______, _______, _______,                                 KC_AUDIO_MUTE,  _______, _______, _______, _______, WEBUSB_PAIR,    RESET,          
+	[MDIA] = LAYOUT_moonlander(
+		TO(BASE),          _______, _______, _______, _______, _______, _______,                                 KC_AUDIO_MUTE,  _______, _______, _______, _______, WEBUSB_PAIR,    RESET,          
 		_______, _______, _______, _______, _______, _______, _______,                                 KC_AUDIO_VOL_UP,_______, _______, _______, _______, _______, _______, 
 		_______, _______, _______, _______, _______, _______, _______,                                                                 KC_AUDIO_VOL_DOWN,_______, _______, _______, RGB_MOD,        RGB_TOG,        _______, 
 		_______, _______, _______, _______, _______, _______,                                 _______, _______, RGB_HUD,        RGB_VAD,        RGB_VAI,        RGB_HUI,        
 		LGUI(LSFT(KC_4)),_______, LGUI(LCTL(LSFT(KC_4))),_______, LGUI(LSFT(KC_5)),LGUI(LCTL(KC_Q)),                                                                                                _______, KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,KC_MEDIA_NEXT_TRACK,
 		_______, _______, _______,                 _______, _______, _______
 	),
-	[3] = LAYOUT_moonlander(
+	[WNDW] = LAYOUT_moonlander(
 		_______, _______, _______, _______, _______, _______, _______,                                 _______, _______, _______, _______, _______, _______, _______, 
 		_______, _______, _______, LALT(LGUI(LCTL(LSFT(KC_UP)))),_______, _______, _______,                                 _______, _______, _______, _______, _______, _______, _______, 
 		_______, _______, LALT(LGUI(LCTL(LSFT(KC_LEFT)))),LALT(LCTL(KC_C)),LALT(LGUI(LCTL(LSFT(KC_RIGHT)))),LALT(LGUI(LCTL(KC_RIGHT))),_______,                                                                 _______, _______, _______, _______, _______, _______, _______, 
@@ -87,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______, _______, _______, _______, _______, _______,                                                                                                 _______, _______, _______, _______, _______, _______, 
 		_______, _______, _______,                 _______, _______, _______
 	),
-	[4] = LAYOUT_moonlander(
+	[SYMB] = LAYOUT_moonlander(
 		_______, _______, _______, _______, _______, _______, _______,                                 _______, _______, _______, _______, _______, _______, _______, 
 		_______, KC_TILD,        KC_GRAVE,       KC_LCBR,        KC_RCBR,        KC_PERC,        _______,                                 _______, KC_CIRC,        _______, _______, _______, _______, _______, 
 		_______, KC_EQUAL,       KC_MINUS,       KC_LPRN,        KC_RPRN,        KC_PLUS,        _______,                                                                 _______, KC_DLR,         KC_EXLM,        _______, _______, KC_COLN,        _______, 
@@ -95,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______, _______, _______, _______, _______, _______,                                                                                                 _______, _______, _______, _______, _______, _______, 
 		_______, _______, _______,                 _______, _______, _______
 	),
-	[5] = LAYOUT_moonlander(
+	[NUMP] = LAYOUT_moonlander(
 		_______, _______, _______, _______, _______, _______, _______,                                 _______, _______, _______, KC_EQUAL,       KC_KP_SLASH,    KC_KP_ASTERISK, _______, 
 		_______, _______, _______, _______, _______, _______, _______,                                 _______, _______, KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_MINUS,    _______, 
 		_______, _______, _______, _______, _______, _______, _______,                                                                 _______, _______, KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_KP_PLUS,     _______, 
