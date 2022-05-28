@@ -70,6 +70,25 @@ enum custom_keycodes {
 #define WM_PSPC LCTL(KC_LEFT)  // previous space
 #define WM_NSPC LCTL(KC_RIGHT) // next space
 
+// helpful defines from drashna/wrappers.h
+#define _________________QWERTY_L1_________________       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
+#define _________________QWERTY_L2_________________       KC_A,    KC_S,    KC_D,    KC_F,    KC_G
+#define _________________QWERTY_L3_________________       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B
+
+#define _________________QWERTY_R1_________________       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P
+#define _________________QWERTY_R2_________________       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT
+#define _________________QWERTY_R3_________________       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH
+
+#define ________________NUMBER_LEFT________________       KC_1,    KC_2,    KC_3,    KC_4,    KC_5
+#define ________________NUMBER_RIGHT_______________       KC_6,    KC_7,    KC_8,    KC_9,    KC_0
+#define _________________FUNC_LEFT_________________       KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5
+#define _________________FUNC_RIGHT________________       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10
+
+#define ___________________BLANK___________________       _______, _______, _______, _______, _______
+
+// END defines from drashna/wrappers.h
+
+
 // LAYOUT
 //
 // This trick allows vscode to recognise the core keycodes
@@ -78,11 +97,11 @@ enum custom_keycodes {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[BASE] = LAYOUT_moonlander_wrapper(
-		KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_MINS,         KC_EQL,  KC_6,   KC_7,    KC_8,    KC_9,    KC_0,     KC_MINUS,
-		KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,         KC_RBRC, KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,     KC_BSLASH,
+		KC_GRV,  ________________NUMBER_LEFT________________, KC_MINS,         KC_EQL,  ________________NUMBER_RIGHT_______________, KC_MINUS,
+		KC_TAB,  _________________QWERTY_L1_________________, KC_LBRC,         KC_RBRC, _________________QWERTY_R1_________________, KC_BSLASH,
 		HYP_ESC, CTL_A,   ALT_S,   GUI_D,   SFT_F,   KC_G,    _______,         _______, KC_H,   SFT_J,   GUI_K,   ALT_L,   CTL_SCLN, KC_QUOTE,
-		KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                              KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLASH, KC_RSHIFT,
-		KC_LCTL, KC_LALT, KC_LGUI, _______, MO(MOVE),       _______,              _______,      MO(SYMB), _______, KC_RGUI, KC_RALT,  KC_RCTRL,
+		KC_LSFT, _________________QWERTY_L3_________________,                           _________________QWERTY_R3_________________, KC_RSHIFT,
+		KC_LCTL, KC_LALT, KC_LGUI, _______, MO(MOVE),       _______,              _______,      MO(SYMB), _______, KC_RGUI, KC_RALT, KC_RCTRL,
 												KC_BSPC,MO(NUMP),MO(MDIA),  MO(WNDW),KC_ENT,KC_SPC
 	),
 	[MOVE] = LAYOUT_moonlander_wrapper(
