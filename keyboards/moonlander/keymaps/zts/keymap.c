@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[MDIA] = LAYOUT_moonlander(
 		TO(BASE),          _______, _______, _______, _______, _______, _______,                                 KC_AUDIO_MUTE,  _______, _______, _______, _______, WEBUSB_PAIR,    RESET,          
-		_______, _______, _______, _______, _______, _______, _______,                                 KC_AUDIO_VOL_UP,_______, _______, _______, _______, _______, _______, 
+		DT_PRNT, DT_DOWN, DT_UP, _______, _______, _______, _______,                                 KC_AUDIO_VOL_UP,_______, _______, _______, _______, _______, _______, 
 		_______, _______, _______, _______, _______, _______, _______,                                                                 KC_AUDIO_VOL_DOWN,_______, _______, _______, RGB_MOD,        RGB_TOG,        _______, 
 		_______, _______, _______, _______, _______, _______,                                 _______, _______, RGB_HUD,        RGB_VAD,        RGB_VAI,        RGB_HUI,        
 		LGUI(LSFT(KC_4)),_______, LGUI(LCTL(LSFT(KC_4))),_______, LGUI(LSFT(KC_5)),LGUI(LCTL(KC_Q)),                                                                                                _______, KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,KC_MEDIA_NEXT_TRACK,
