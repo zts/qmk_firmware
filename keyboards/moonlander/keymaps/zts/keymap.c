@@ -36,14 +36,10 @@ enum custom_keycodes {
     VRSN = ML_SAFE_RANGE,
 };
 
-#define KC_MAC_UNDO LGUI(KC_Z)
-#define KC_MAC_CUT LGUI(KC_X)
-#define KC_MAC_COPY LGUI(KC_C)
-#define KC_MAC_PASTE LGUI(KC_V)
-#define KC_PC_UNDO LCTL(KC_Z)
-#define KC_PC_CUT LCTL(KC_X)
-#define KC_PC_COPY LCTL(KC_C)
-#define KC_PC_PASTE LCTL(KC_V)
+#define KC_UNDO LGUI(KC_Z)
+#define KC_CUT LGUI(KC_X)
+#define KC_COPY LGUI(KC_C)
+#define KC_PASTE LGUI(KC_V)
 
 // Left-hand home row mods
 #define CTL_A LCTL_T(KC_A)
@@ -60,6 +56,22 @@ enum custom_keycodes {
 // Hyper Escape
 #define HYP_ESC ALL_T(KC_ESCAPE)
 
+// Media layer shortcuts
+#define SS_FSEL  LGUI(LSFT(KC_4)) // Grab region to file
+#define SS_CSEL  LGUI(LCTL(LSFT(KC_4))) // Grab region to clipboard
+#define SS_OPTS  LGUI(LSFT(KC_5)) // Grab with options
+#define MAC_LOCK LGUI(LCTL(KC_Q)) // Lock screen
+
+// Movement layer shortcuts
+#define MAC_PREV LGUI(KC_LBRC) // back / previous
+#define MAC_NEXT LGUI(KC_RBRC) // forward / next
+
+// Window mgmt layer shortcuts
+#define WM_PSPC LCTL(KC_LEFT)  // previous space
+#define WM_NSPC LCTL(KC_RIGHT) // next space
+
+// LAYOUT
+//
 // This trick allows vscode to recognise the core keycodes
 #define LAYOUT_moonlander_wrapper(...) LAYOUT_moonlander(__VA_ARGS__)
 
@@ -75,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
 	[MOVE] = LAYOUT_moonlander_wrapper(
 		TO(BASE),_______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
-		_______, _______, _______, _______, _______, _______, _______,         _______, LCTL(KC_LEFT),LGUI(KC_LBRC),LGUI(KC_RBRC),RCTL(KC_RIGHT), _______, _______,
+		_______, _______, _______, _______, _______, _______, _______,         _______, _______, MAC_PREV,MAC_NEXT,_______, _______, _______,
 		_______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______, _______,         _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______,
 		_______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE,_______,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______,
 		_______, _______, _______, _______, _______,        _______,              _______,       _______, _______, _______, _______, _______,
@@ -85,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		TO(BASE),_______, _______, _______, _______, _______, _______,         KC_MUTE, _______, _______, _______, _______, _______, RESET,
 		DT_PRNT, DT_DOWN, DT_UP,   _______, _______, _______, _______,         KC_VOLU, _______, _______, _______, _______, _______, _______,
 		_______, _______, _______, _______, _______, _______, _______,         KC_VOLD, _______, _______, _______, RGB_MOD, RGB_TOG, _______,
-		_______, _______, _______, _______, _______, _______,                     _______,       _______, RGB_HUD, RGB_VAD, RGB_VAI, RGB_HUI,
-		LGUI(LSFT(KC_4)),_______, LGUI(LCTL(LSFT(KC_4))),_______, LGUI(LSFT(KC_5)),LGUI(LCTL(KC_Q)),     _______, KC_MPLY, KC_MPRV, _______, _______, KC_MNXT,
-												_______, _______, _______,                 _______, _______, _______
+		_______, _______, _______, _______, _______, _______,                           _______, _______, RGB_HUD, RGB_VAD, RGB_VAI, RGB_HUI,
+		SS_FSEL, _______, SS_CSEL, _______, SS_OPTS,        MAC_LOCK,            _______,        KC_MPLY, KC_MPRV, _______, _______, KC_MNXT,
+												_______, _______, _______,   _______, _______, _______
 	),
 	[WNDW] = LAYOUT_moonlander_wrapper(
 		_______, _______, _______, _______, _______, _______, _______,         _______, _______, _______, _______, _______, _______, _______,
