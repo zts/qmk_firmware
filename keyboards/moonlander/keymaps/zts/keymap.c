@@ -52,16 +52,27 @@ enum custom_keycodes {
   RGB_SLD = ML_SAFE_RANGE,
 };
 
+// Left-hand home row mods
+#define CTL_A LCTL_T(KC_A)
+#define ALT_S LALT_T(KC_S)
+#define GUI_D LGUI_T(KC_D)
+#define SFT_F LSFT_T(KC_F)
+
+// Right-hand home row mods
+#define SFT_J RSFT_T(KC_J)
+#define GUI_K RGUI_T(KC_K)
+#define ALT_L LALT_T(KC_L)
+#define CTL_SCLN RCTL_T(KC_SCLN)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     KC_GRAVE,       KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_MINUS,                                       KC_EQUAL,       KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_MINUS,       
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_LBRACKET,                                    KC_RBRACKET,    KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLASH,      
-    ALL_T(KC_ESCAPE),MT(MOD_LCTL, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LGUI, KC_D),MT(MOD_LSFT, KC_F),KC_G,           KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_H,           MT(MOD_RSFT, KC_J),MT(MOD_RGUI, KC_K),MT(MOD_LALT, KC_L),MT(MOD_RCTL, KC_SCOLON),KC_QUOTE,       
-    KC_LSHIFT,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_RSHIFT,      
-    KC_LCTRL,       KC_LALT,        KC_LGUI,        KC_TRANSPARENT, MO(1),          KC_TRANSPARENT,                                                                                                 LGUI(KC_SPACE), MO(4),          KC_TRANSPARENT, KC_RGUI,        KC_RALT,        KC_RCTRL,       
-    KC_BSPACE,      MO(5),          MO(2),                          MO(3),          KC_ENTER,       KC_SPACE
+    ALL_T(KC_ESCAPE),CTL_A,         ALT_S,          GUI_D,          SFT_F,          KC_G,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_H,           SFT_J,          GUI_K,          ALT_L,          CTL_SCLN,       KC_QUOTE,       
+    KC_LSHIFT,      KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_RSHIFT,      
+    KC_LCTRL,       KC_LALT,        KC_LGUI,        KC_TRANSPARENT, MO(1),          KC_TRANSPARENT,                                                                 LGUI(KC_SPACE), MO(4),          KC_TRANSPARENT, KC_RGUI,        KC_RALT,        KC_RCTRL,       
+                                                                                    KC_BSPACE,      MO(5),          MO(2),          MO(3),          KC_ENTER,       KC_SPACE
   ),
   [1] = LAYOUT_moonlander(
     TO(0),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
