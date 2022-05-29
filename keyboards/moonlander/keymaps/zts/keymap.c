@@ -163,39 +163,84 @@ void keyboard_post_init_user(void) {
 }
 
 #define ___off___ {HSV_OFF}
+#define H_WHITE {HSV_WHITE}
 #define H_BLUE {HSV_BLUE}
 #define H_RED {HSV_RED}
 #define H_GREEN {HSV_GREEN}
 #define H_PURPLE {HSV_PURPLE}
 #define H_GOLD {HSV_GOLD}
 #define H_ORANGE {HSV_ORANGE}
-#define BLANK_LAYER { \
-	___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, \
-	___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, \
-	___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, \
-	___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, \
-	___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, \
-												   ___off___, ___off___, ___off___,   ___off___, ___off___, ___off___ \
-}
+// LED id sequence is different to key layout sequence.
+// This def converts the layout sequence (easier to hand edit) into the LED sequence.
+#define LAYOUT_to_ledmap( \
+	K01, K06, K11, K16, K21, K26, K30,        K66, K62, K57, K52, K47, K42, K37, \
+	K02, K07, K12, K17, K22, K27, K31,        K67, K63, K58, K53, K48, K43, K38, \
+	K03, K08, K13, K18, K23, K28, K32,        K68, K64, K59, K54, K49, K44, K39, \
+	K04, K09, K14, K19, K24, K29,                  K65, K60, K55, K50, K45, K40, \
+	K05, K10, K15, K20, K25,      K36,        K72,      K61, K56, K51, K46, K41, \
+	                       K33, K34, K35,  K71, K70, K69 \
+) \
+{ K01, K02, K03, K04, K05, K06, K07, K08, K09, K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, K20, K21, K22, K23, K24, K25, K26, K27, K28, K29, K30, K31, K32, K33, K34, K35, K36, K37, K38, K39, K40, K41, K42, K43, K44, K45, K46, K47, K48, K49, K50, K51, K52, K53, K54, K55, K56, K57, K58, K59, K60, K61, K62, K63, K64, K65, K66, K67, K68, K69, K70, K71, K72 }
 
 const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
-    [BASE] - BLANK_LAYER,
-    [MOVE] - BLANK_LAYER,
-    [MDIA] - BLANK_LAYER,
-	[WNDW] - BLANK_LAYER,
-	[SYMB] - BLANK_LAYER,
-	[NUMP] - BLANK_LAYER,
+	[BASE] = LAYOUT_to_ledmap(
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___,
+												        H_RED , ___off___, ___off___,   ___off___, H_GREEN, H_WHITE
+	),
+	[MOVE] = LAYOUT_to_ledmap(
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___,
+														___off___, ___off___, ___off___,   ___off___, ___off___, ___off___
+	),
+	[MDIA] = LAYOUT_to_ledmap(
+		H_BLUE, H_BLUE, H_BLUE, H_BLUE, H_BLUE, H_RED, H_RED,                  H_RED, H_RED, H_RED, H_GREEN, H_GREEN, H_GREEN, H_GREEN,
+		H_GREEN, H_PURPLE, H_PURPLE, H_PURPLE, H_PURPLE, H_PURPLE, H_GOLD,     H_GOLD, H_GOLD, H_GOLD, H_GOLD, H_ORANGE, H_ORANGE, H_ORANGE,
+		H_ORANGE, H_ORANGE, H_BLUE, H_BLUE, H_BLUE, H_BLUE, H_BLUE,            H_RED, H_RED, H_RED, H_RED, H_RED, H_GREEN, H_GREEN,
+		H_GREEN, H_GREEN, H_GREEN, H_PURPLE, H_PURPLE, H_PURPLE,                               H_PURPLE, H_PURPLE, H_GOLD, H_GOLD, H_GOLD, H_GOLD,
+		H_GOLD, H_BLUE, H_BLUE, H_BLUE, H_BLUE,      H_RED,                     H_RED,         H_BLUE, H_ORANGE, H_ORANGE, H_ORANGE, H_ORANGE,
+													H_GREEN, H_GOLD, H_GREEN,   H_GOLD, H_GREEN, H_GOLD
+	),
+	[WNDW] = LAYOUT_to_ledmap(
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___,
+														___off___, ___off___, ___off___,   ___off___, ___off___, ___off___
+	),
+	[SYMB] = LAYOUT_to_ledmap(
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___,
+														___off___, ___off___, ___off___,   ___off___, ___off___, ___off___
+	),
+	[NUMP] = LAYOUT_to_ledmap(
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, H_WHITE  , H_WHITE  , H_WHITE  , ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, H_WHITE  , H_WHITE  , H_WHITE  , ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, H_WHITE  , H_WHITE  , H_WHITE  , ___off___, ___off___,
+		___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         H_WHITE  , H_RED    , ___off___, ___off___, ___off___,
+												      ___off___, ___off___, ___off___,   ___off___, ___off___, ___off___
+	)
 };
 
-// Note: Needs rotation - driver led numbering runs top to bottom, then left to right.
-//  [x] = {
+//  [x] = LAYOUT_to_ledmap(
 //  	___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
 //  	___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
 //  	___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
 //  	___off___, ___off___, ___off___, ___off___, ___off___, ___off___,                               ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
 //  	___off___, ___off___, ___off___, ___off___, ___off___,      ___off___,                  ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___,
-//												       ___off___, ___off___, ___off___,   ___off___, ___off___, ___off___,
-//  }
+//												       ___off___, ___off___, ___off___,   ___off___, ___off___, ___off___
+//  ),
 
 void set_layer_color(int layer) {
   for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
