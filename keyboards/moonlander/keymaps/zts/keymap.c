@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,  _________________QWERTY_L1_________________, KC_LBRC,         KC_RBRC, _________________QWERTY_R1_________________, KC_BSLASH,
 		HYP_ESC, CTL_A,   ALT_S,   GUI_D,   SFT_F,   KC_G,    _______,         _______, KC_H,   SFT_J,   GUI_K,   ALT_L,   CTL_SCLN, KC_QUOTE,
 		KC_LSFT, _________________QWERTY_L3_________________,                           _________________QWERTY_R3_________________, KC_RSHIFT,
-		KC_LCTL, KC_LALT, KC_LGUI, _______, MO(MOVE),       _______,              _______,      MO(SYMB), _______, KC_RGUI, KC_RALT, KC_RCTRL,
+		KC_LCTL, KC_LALT, KC_LGUI, MO(NUMP), MO(MOVE),      _______,              _______,      MO(SYMB), _______, KC_RGUI, KC_RALT, KC_RCTRL,
 												KC_BSPC,MO(NUMP),MO(MDIA),  MO(WNDW),KC_ENT,KC_SPC
 	),
 	[MOVE] = LAYOUT_moonlander_wrapper(
