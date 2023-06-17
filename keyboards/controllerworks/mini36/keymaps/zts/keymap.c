@@ -30,6 +30,12 @@
 #define ALT_L LALT_T(KC_L)
 #define CTL_SCLN RCTL_T(KC_SCLN)
 
+// MacOS clipboard shortcuts
+#define KC_UNDO LGUI(KC_Z)
+#define KC_CUT LGUI(KC_X)
+#define KC_COPY LGUI(KC_C)
+#define KC_PASTE LGUI(KC_V)
+
 enum layers {
     BASE,  // default layer
     LOWER, // lower layer
