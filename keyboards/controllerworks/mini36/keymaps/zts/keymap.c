@@ -15,6 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+// oled functions
+#include "quantum.h"
 
 // Left-hand home row mods
 #define CTL_A LCTL_T(KC_A)
@@ -39,27 +41,22 @@ enum layers {
 	NUMP,  // numpad
 };
 
+const char * const layers_as_strings[] = {
+    [BASE] = "BASE",
+    [LOWER] = "__ LoWer __",
+    [RAISE] = "^^ Raise ^^",
+    [ADJUST] = "> ADJust <",
+    [MOVE] = "=> MoVe <=",
+    [WNDW] = ":> Window <:",
+    [SYMB] = "%% Symbol %%",
+    [NUMP] = "Num Pad",
+};
+
 bool oled_task_user(void) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
-
-    switch (get_highest_layer(layer_state)) {
-        case BASE:
-            oled_write_P(PSTR("BASE\n"), false);
-            break;
-        case LOWER:
-            oled_write_P(PSTR("LOWER\n"), false);
-            break;
-        case RAISE:
-            oled_write_P(PSTR("RAISE\n"), false);
-            break;
-        case ADJUST:
-            oled_write_P(PSTR("ADJUST\n"), false);
-            break;
-        default:
-            // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("Undefined"), false);
-    }
+    int layer = get_highest_layer(layer_state);
+    oled_write_ln_P(PSTR(layers_as_strings[layer]), false);
 
     // Host Keyboard LED Status
     led_t led_state = host_keyboard_led_state();
