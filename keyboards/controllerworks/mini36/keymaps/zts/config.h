@@ -26,6 +26,8 @@
 #define QUICK_TAP_TERM 100
 // END homerowmods
 
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
 
 #ifdef RGB_MATRIX_ENABLE
 //#    define SPLIT_TRANSPORT_MIRROR
