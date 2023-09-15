@@ -32,6 +32,7 @@
 
 // MacOS clipboard shortcuts
 #define KC_UNDO LGUI(KC_Z)
+#define KC_REDO SCMD(KC_Z)
 #define KC_CUT LGUI(KC_X)
 #define KC_COPY LGUI(KC_C)
 #define KC_PASTE LGUI(KC_V)
@@ -83,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                MO(MOVE),   MO(LOWER),  KC_BSPC,  KC_ENT, LT(SYMB, KC_SPC), LT(RAISE, KC_ESC)
+               KC_ESC, LT(MOVE, KC_TAB), LT(WNDW, KC_BSPC),  KC_ENT, LT(SYMB, KC_SPC), LT(RAISE, KC_ESC)
                             //`--------------------------'  `--------------------------'
 
   ),
@@ -125,15 +126,10 @@ RCTL_T(KC_TAB), KC_LALT, KC_LGUI, KC_LSFT, XXXXXXX,                      XXXXXXX
   ),
 
   [MOVE] = LAYOUT_split_3x5_3(
-  //,--------------------------------------------.                    ,--------------------------------------------.
-      _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______,
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-  //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE, _______,                     KC_END,  KC_PGDN, KC_PGUP, KC_HOME, _______,
-  //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 _______, _______, _______,    _______, MO(WNDW), _______
-                             //`--------------------------'  `--------------------------'
+      QK_BOOT, _______, _______, _______, _______,                      KC_REDO,KC_PASTE, KC_COPY,  KC_CUT, KC_UNDO,
+      KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, CW_TOGG,
+      _______, KC_ALGR, _______, _______, _______,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS,
+                                 _______, _______, _______,    _______, _______, _______
   ),
 
   [WNDW] = LAYOUT_split_3x5_3(
