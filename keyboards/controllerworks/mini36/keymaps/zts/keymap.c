@@ -126,7 +126,7 @@ RCTL_T(KC_TAB), KC_LALT, KC_LGUI, KC_LSFT, XXXXXXX,                      XXXXXXX
   ),
 
   [MOVE] = LAYOUT_split_3x5_3(
-      QK_BOOT, _______, _______, _______, _______,                      KC_REDO,KC_PASTE, KC_COPY,  KC_CUT, KC_UNDO,
+      QK_BOOT, _______, _______, _______,TO(BASE),                      KC_REDO,KC_PASTE, KC_COPY,  KC_CUT, KC_UNDO,
       KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, CW_TOGG,
       _______, KC_ALGR, _______, _______, _______,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS,
                                  _______, _______, _______,    _______, _______, _______
@@ -134,7 +134,7 @@ RCTL_T(KC_TAB), KC_LALT, KC_LGUI, KC_LSFT, XXXXXXX,                      XXXXXXX
 
   [WNDW] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      _______, _______, _______, _______, _______,                      _______, KC_KP_7, _______, KC_KP_9, _______,
+      QK_BOOT, _______, _______, _______,TO(BASE),                      _______, KC_KP_7, _______, KC_KP_9, _______,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       _______, _______, _______, _______, _______,                      KC_KP_4, KC_KP_2, KC_KP_8, KC_KP_6, KC_KP_5,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -157,7 +157,7 @@ RCTL_T(KC_TAB), KC_LALT, KC_LGUI, KC_LSFT, XXXXXXX,                      XXXXXXX
   ),
 
   [NUMP] = LAYOUT_split_3x5_3(
-      QK_BOOT, _______, _______, _______, _______,                      _______, KC_7, KC_8, KC_9, _______,
+      QK_BOOT, _______, _______, _______,TO(BASE),                      _______, KC_7, KC_8, KC_9, _______,
       KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                      _______, KC_4, KC_5, KC_6, _______,
       _______, _______, _______, _______, _______,                      _______, KC_1, KC_2, KC_3, _______,
                                  _______, _______, _______,    _______, KC_0, KC_PDOT
