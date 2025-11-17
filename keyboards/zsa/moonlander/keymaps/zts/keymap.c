@@ -34,7 +34,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    VRSN = ML_SAFE_RANGE,
+    VRSN = SAFE_RANGE,
 };
 
 #define KC_UNDO LGUI(KC_Z)
@@ -99,10 +99,10 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[BASE] = LAYOUT_moonlander_wrapper(
 		KC_GRV,  ________________NUMBER_LEFT________________, KC_MINS,         KC_EQL,  ________________NUMBER_RIGHT_______________, KC_MINUS,
-		KC_TAB,  _________________QWERTY_L1_________________, KC_LBRC,         KC_RBRC, _________________QWERTY_R1_________________, KC_BSLASH,
+		KC_TAB,  _________________QWERTY_L1_________________, KC_LBRC,         KC_RBRC, _________________QWERTY_R1_________________, KC_BSLS,
 		HYP_ESC, CTL_A,   ALT_S,   GUI_D,   SFT_F,   KC_G,    _______,         _______, KC_H,   SFT_J,   GUI_K,   ALT_L,   CTL_SCLN, KC_QUOTE,
-		KC_LSFT, _________________QWERTY_L3_________________,                           _________________QWERTY_R3_________________, KC_RSHIFT,
-		KC_LCTL, KC_LALT, KC_LGUI, MO(WNDW), MO(MOVE),      _______,              _______,      MO(SYMB), _______, KC_RGUI, KC_RALT, KC_RCTRL,
+		KC_LSFT, _________________QWERTY_L3_________________,                           _________________QWERTY_R3_________________, KC_RSFT,
+		KC_LCTL, KC_LALT, KC_LGUI, MO(WNDW), MO(MOVE),      _______,              _______,      MO(SYMB), _______, KC_RGUI, KC_RALT, KC_RCTL,
 												KC_BSPC,MO(NUMP),MO(MDIA),  MO(WNDW),KC_ENT,KC_SPC
 	),
 	[MOVE] = LAYOUT_moonlander_wrapper(
@@ -116,8 +116,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[MDIA] = LAYOUT_moonlander_wrapper(
 		TO(BASE),_______, _______, _______, _______, _______, _______,         KC_MUTE, _______, _______, _______, _______, _______, RESET,
 		DT_PRNT, DT_DOWN, DT_UP,   _______, _______, _______, _______,         KC_VOLU, _______, _______, _______, _______, _______, _______,
-		_______, _______, _______, _______, _______, _______, _______,         KC_VOLD, _______, _______, _______, RGB_MOD, RGB_TOG, _______,
-		_______, _______, _______, _______, _______, _______,                           _______, _______, RGB_HUD, RGB_VAD, RGB_VAI, RGB_HUI,
+		_______, _______, _______, _______, _______, _______, _______,         KC_VOLD, _______, _______, _______, RM_NEXT, RM_TOGG, _______,
+		_______, _______, _______, _______, _______, _______,                           _______, _______, RM_HUED, RM_VALD, RM_VALU, RM_HUEU,
 		SS_FSEL, _______, SS_CSEL, _______, SS_OPTS,        MAC_LOCK,            _______,        KC_MPLY, KC_MPRV, _______, _______, KC_MNXT,
 												_______, _______, _______,   _______, _______, _______
 	),
@@ -182,7 +182,7 @@ void keyboard_post_init_user(void) {
 ) \
 { K01, K02, K03, K04, K05, K06, K07, K08, K09, K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, K20, K21, K22, K23, K24, K25, K26, K27, K28, K29, K30, K31, K32, K33, K34, K35, K36, K37, K38, K39, K40, K41, K42, K43, K44, K45, K46, K47, K48, K49, K50, K51, K52, K53, K54, K55, K56, K57, K58, K59, K60, K61, K62, K63, K64, K65, K66, K67, K68, K69, K70, K71, K72 }
 
-const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
+const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 	[BASE] = LAYOUT_to_ledmap(
 		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
 		___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,         ___off___, ___off___, ___off___, ___off___, ___off___, ___off___, ___off___,
@@ -243,7 +243,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
 //  ),
 
 void set_layer_color(int layer) {
-  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+  for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
     HSV hsv = {
       .h = pgm_read_byte(&ledmap[layer][i][0]),
       .s = pgm_read_byte(&ledmap[layer][i][1]),
@@ -259,8 +259,8 @@ void set_layer_color(int layer) {
   }
 }
 
-void rgb_matrix_indicators_user(void) {
-  if (keyboard_config.disable_layer_led) { return; }
+bool rgb_matrix_indicators_user(void) {
+  if (keyboard_config.disable_layer_led) { return false; }
   switch (biton32(layer_state)) {
     case 0:
       set_layer_color(0);
@@ -285,6 +285,7 @@ void rgb_matrix_indicators_user(void) {
       rgb_matrix_set_color_all(0, 0, 0);
     break;
   }
+  return false;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
